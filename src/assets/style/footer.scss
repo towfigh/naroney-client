@@ -1,0 +1,57 @@
+.Footer {
+	background-color: $pink-light;
+}
+.footer_info {
+	h4 {
+		font-family: nastaliq;
+		font-size: 2.5rem;
+		text-align: center;
+		width: 85%;
+	}
+	h6 {
+		font-size: 1.1rem;
+	}
+	p {
+		font-size: 1.1rem;
+	}
+}
+
+.map {
+	width: 75vw;
+	margin: auto;
+}
+
+.copyright {
+	font-size: 0.7rem;
+}
+
+// *********************
+// Media Queries
+// *********************
+@media (min-width: 576px) {
+	.map {
+		width: 100%;
+		margin: auto;
+	}
+}
+
+@media (min-width: 1400px) {
+	.Footer {
+		background-color: $pink-light;
+	}
+	.footer_info {
+		h4 {
+			font-family: nastaliq;
+			font-size: 3rem;
+		}
+		h6 {
+			font-size: 1.5rem;
+		}
+		p {
+			font-size: 1.5rem;
+		}
+	}
+	.copyright {
+		font-size: 1.2rem;
+	}
+}
