@@ -63,6 +63,9 @@ const Navigation = ({ expand }) => {
 						<Link to="/">خانه</Link>
 					</Nav.Link>
 					<NavDropdown title="محصولات" id="basic-nav-dropdown">
+						<NavDropdown.Item href="/products/0">
+							- تمام محصولات
+						</NavDropdown.Item>
 						<NavDropdown.Item href="#action/3.1">- لباس عروس</NavDropdown.Item>
 						<NavDropdown.Item href="#action/3.2">- لباس شب</NavDropdown.Item>
 						<NavDropdown.Item href="#action/3.3">

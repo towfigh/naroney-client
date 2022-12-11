@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Slider = ({
 	data,
@@ -53,6 +54,7 @@ const Slider = ({
 						{data.map((item) => {
 							return (
 								<div
+									className="shadow"
 									key={item.id}
 									style={{
 										width: `${100 / Number(activeSlides)}%`,
@@ -83,8 +85,11 @@ const Slider = ({
 										src={`${process.env.PUBLIC_URL}/img/${item.img}`}
 									/>
 									<h4 className="my-3">{item.label}</h4>
-									<button type="button" className="nn_btn_secondary">
-										مشاهده جزئیات
+									<button
+										type="button"
+										className="nn_btn_secondary fs-6 px-1 py-0"
+									>
+										<Link to={`/product/${item.id}`}>مشاهده جزئیات</Link>
 									</button>
 								</div>
 							);

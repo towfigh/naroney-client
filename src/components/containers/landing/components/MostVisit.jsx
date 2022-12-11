@@ -73,7 +73,7 @@ const MostVisit = () => {
 
 	return (
 		<div className="most_visit">
-			<h1 className="text-center fw-bolder mx-auto py-3 my-5">
+			<h1 className="middle-title_lg text-center fw-bolder mx-auto py-3 my-5">
 				پربازدیدترین محصولات
 			</h1>
 			<Slider

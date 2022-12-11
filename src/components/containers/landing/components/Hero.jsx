@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
 	return (
@@ -10,7 +11,7 @@ const Hero = () => {
 				</h6>
 				<div className="hero_btn mx-auto">
 					<button type="button" className="nn_btn_primary mt-4">
-						نمایش محصولات
+						<Link to="/products/0">نمایش محصولات</Link>
 					</button>
 				</div>
 			</div>

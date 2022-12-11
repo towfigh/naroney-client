@@ -1,0 +1,18 @@
+.info_item {
+	span {
+		svg {
+			fill: $pink;
+		}
+	}
+}
+
+.product-img {
+	button {
+		img {
+			transition: all 1s;
+		}
+		.product-img_deactive {
+			filter: brightness(0.6);
+		}
+	}
+}

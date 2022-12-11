@@ -10,12 +10,12 @@ import { PersistGate } from 'redux-persist/integration/react';
 function App() {
 	return (
 		<Provider store={store}>
-				<PersistGate persistor={persistor}>
-					<BrowserRouter>
-						<Router />
-					</BrowserRouter>
-				</PersistGate>
-			</Provider>
+			<PersistGate persistor={persistor}>
+				<BrowserRouter>
+					<Router />
+				</BrowserRouter>
+			</PersistGate>
+		</Provider>
 	);
 }
 
