@@ -1,9 +1,6 @@
 import React from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 
-import Footer from '../components/layouts/footer/Footer';
-import Navigation from '../components/layouts/navigation/Navigation';
 import Landing from '../components/containers/landing/Landing';
 import About from '../components/containers/about/About';
 import Product from '../components/containers/product/Product';
@@ -11,6 +8,13 @@ import Products from '../components/containers/products/Products';
 import NotFound from '../components/containers/not-found/NotFound';
 import PrivateRoutes from './PrivateRoute';
 import Login from '../components/containers/login/Login';
+import Wrapper from './Wrapper';
+import Dashboard from '../components/containers/admin/dashboard/Dashboard';
+import EditContact from '../components/containers/admin/editContact/EditContact';
+import Categories from '../components/containers/admin/categories/Categories';
+import Profile from '../components/containers/admin/profile/Profile';
+import ProductsAdmin from '../components/containers/admin/products/ProductsAdmin';
+import { ToastContainer } from 'react-toastify';
 
 const Router = () => {
 	return (
@@ -21,27 +25,20 @@ const Router = () => {
 				hideProgressBar={false}
 				newestOnTop
 				closeOnClick
-				rtl={false}
+				rtl={true}
 				pauseOnFocusLoss
 				draggable
 				pauseOnHover
 				theme="dark"
-				className="toast_in_dashboard"
 				draggablePercent={40}
 			/>
 			<Routes>
 				<Route
 					path="/"
 					element={
-						<>
-							<Navigation />
-							<main>
-								<div>
-									<Outlet />
-								</div>
-							</main>
-							<Footer />
-						</>
+						<Wrapper>
+							<Outlet />
+						</Wrapper>
 					}
 				>
 					<Route exact path="/" element={<Landing />} />
@@ -51,20 +48,18 @@ const Router = () => {
 				</Route>
 				<Route path="/nnlogin" element={<Login />} />
 				<Route element={<PrivateRoutes />}>
-					<Route path="/admin" element={<h1>admin</h1>} />
+					<Route path="/admin" element={<Dashboard />} />
+					<Route path="/admin/editcontact" element={<EditContact />} />
+					<Route path="/admin/categories" element={<Categories />} />
+					<Route path="/admin/profile" element={<Profile />} />
+					<Route path="/admin/products" element={<ProductsAdmin />} />
 				</Route>
 				<Route
 					path="*"
 					element={
-						<>
-							<Navigation />
-							<main>
-								<div>
-									<NotFound />
-								</div>
-							</main>
-							<Footer />
-						</>
+						<Wrapper>
+							<NotFound />
+						</Wrapper>
 					}
 				/>
 			</Routes>

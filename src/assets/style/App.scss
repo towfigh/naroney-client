@@ -55,7 +55,7 @@ textarea {
 }
 
 .nn_btn_primary {
-	// font-family: yekan;
+	font-family: yekan;
 	border: solid 2px transparent;
 	background-color: $pink;
 	color: $black;
@@ -63,9 +63,7 @@ textarea {
 	font-size: 1.3rem;
 	transition: all 0.3s;
 }
-.nn_btn_primary:hover,
-.nn_btn_primary:focus,
-.nn_btn_primary:active {
+.nn_btn_primary:hover {
 	border: solid 2px $pink;
 	background-color: transparent;
 	color: $pink;
@@ -79,9 +77,7 @@ textarea {
 	font-size: 0.9rem;
 	transition: all 0.3s;
 }
-.nn_btn_secondary:hover,
-.nn_btn_secondary:focus,
-.nn_btn_secondary:active {
+.nn_btn_secondary:hover {
 	border: solid 1px $pink;
 	background-color: $pink;
 	color: $white;
@@ -91,18 +87,37 @@ textarea {
 	border-bottom: solid 1px $pink;
 	width: max-content;
 }
+
+.admin_layout {
+	width: calc(100% - 250px);
+	left: 0;
+}
+
+@media (max-width: 768px) {
+	.admin_layout {
+		width: 100%;
+	}
+}
+
 @media (max-width: 576px) {
 	html,
 	body {
 		letter-spacing: -1px;
 	}
 }
+
+// Layouts
+
+@import './footer.scss';
+@import './navigation.scss';
+@import './sidebar.scss';
+
+// Pages
 @import './landing.scss';
 @import './header.scss';
-@import './navigation.scss';
-@import './footer.scss';
 @import './product.scss';
-
 @import './login.scss';
+@import './admin.scss';
 
+// Plugins
 @import './ReactToastify.scss';

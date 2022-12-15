@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Dashboard = () => {
+const Categories = () => {
 	return (
 		<>
 			<h1 className="middle-title_lg text-center fw-bolder mx-auto py-3 my-4">
-				Dashboard
+				Categories
 			</h1>
 		</>
 	);
 };
 
-export default Dashboard;
+export default Categories;

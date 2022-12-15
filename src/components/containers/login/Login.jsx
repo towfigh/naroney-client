@@ -5,7 +5,8 @@ import axios from 'axios';
 import { toastConfig } from '../../../utils/toastHelper';
 import { useDispatch } from 'react-redux';
 import { setAdmin } from '../../../redux/actions/adminActions';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { setContact } from '../../../redux/actions/mainActions';
 
 const Login = () => {
 	const [username, setUsername] = useState('');
@@ -24,7 +25,8 @@ const Login = () => {
 				console.clear();
 				console.log(data.data);
 				if (data?.data?.status === 'ok') {
-					dispatch(setAdmin(data?.data?.data));
+					dispatch(setAdmin(data?.data?.data?.user));
+					dispatch(setContact(data?.data?.data?.contact));
 					navigate('/admin', { replace: true });
 				} else if (data?.data?.status === 'err') {
 					toast.error(data?.data?.msg, toastConfig);
@@ -47,7 +49,7 @@ const Login = () => {
 							autoComplete="false"
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
-							// required
+							required
 						/>
 					</Form.Group>
 
@@ -59,12 +61,17 @@ const Login = () => {
 							autoComplete="false"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
-							// required
+							required
 						/>
 					</Form.Group>
+
 					<button type="submit" className="nn_btn_primary w-100 fs-3 p-0">
 						ورود
 					</button>
+
+					<Link to="/" className="text-center m-auto mt-3">
+						<h6 className="text-center m-auto w-100 mt-3">صفحه اصلی سایت</h6>
+					</Link>
 				</Form>
 			</div>
 		</>

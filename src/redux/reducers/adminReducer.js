@@ -4,7 +4,7 @@ const initialState = {
 	user: null,
 };
 
-const themeReducer = (state = initialState, action) => {
+const adminReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case SET_ADMIN:
 			return {
@@ -16,4 +16,4 @@ const themeReducer = (state = initialState, action) => {
 	}
 };
 
-export default themeReducer;
+export default adminReducer;

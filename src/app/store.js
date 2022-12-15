@@ -5,9 +5,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import adminReducer from '../redux/reducers/adminReducer';
+import mainReducer from '../redux/reducers/mainReducer';
 
 const reducer = combineReducers({
 	admin: adminReducer,
+	main: mainReducer,
 });
 
 const persistConfig = {
