@@ -15,6 +15,10 @@ import Categories from '../components/containers/admin/categories/Categories';
 import Profile from '../components/containers/admin/profile/Profile';
 import ProductsAdmin from '../components/containers/admin/products/ProductsAdmin';
 import { ToastContainer } from 'react-toastify';
+import AddCategory from '../components/containers/admin/categories/AddCategory';
+import EditCategory from '../components/containers/admin/categories/EditCategory';
+import Colors from '../components/containers/admin/colors/Colors';
+import Sizes from '../components/containers/admin/sizes/Sizes';
 
 const Router = () => {
 	return (
@@ -50,7 +54,16 @@ const Router = () => {
 				<Route element={<PrivateRoutes />}>
 					<Route path="/admin" element={<Dashboard />} />
 					<Route path="/admin/editcontact" element={<EditContact />} />
-					<Route path="/admin/categories" element={<Categories />} />
+					<Route path="/admin/categories" element={<Outlet />}>
+						<Route path="/admin/categories" element={<Categories />} />
+						<Route path="/admin/categories/add" element={<AddCategory />} />
+						<Route
+							path="/admin/categories/edit/:id"
+							element={<EditCategory />}
+						/>
+					</Route>
+					<Route path="/admin/colors" element={<Colors />} />
+					<Route path="/admin/sizes" element={<Sizes />} />
 					<Route path="/admin/profile" element={<Profile />} />
 					<Route path="/admin/products" element={<ProductsAdmin />} />
 				</Route>

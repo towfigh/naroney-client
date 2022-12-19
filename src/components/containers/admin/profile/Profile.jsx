@@ -3,9 +3,10 @@ import axios from 'axios';
 import { Form } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { setAdmin } from '../../../../redux/actions/adminActions';
+import { getProfile, setAdmin } from '../../../../redux/actions/adminActions';
 import { getDate } from '../../../../utils/getDate';
 import { toastConfig } from '../../../../utils/toastHelper';
+import { showLogs } from '../../../../app/Rules';
 
 const Profile = ({ user }) => {
 	const [username, setUsername] = useState('');
@@ -21,14 +22,16 @@ const Profile = ({ user }) => {
 		data.append('password', password);
 		data.append('email', email);
 		data.append('tel', tel);
+		data.append('action', 'EDIT');
 		data.append('date', getDate());
 		data.append('userId', user?.id);
 
 		axios
-			.post('https://api.naroneymeson.ir/admin/editProfile.php', data)
+			.post('https://api.naroneymeson.ir/admin/profile.php', data)
 			.then((data) => {
-				// console.clear();
-				console.log(data.data);
+				if (showLogs) {
+					console.log(data.data);
+				}
 				if (data?.data?.status === 'ok') {
 					dispatch(setAdmin(data?.data?.data));
 					toast.success(data?.data?.msg, toastConfig);
@@ -46,10 +49,16 @@ const Profile = ({ user }) => {
 		setEmail(user?.email || '');
 		setTel(user?.tel || '');
 	}, [user]);
+
+	useEffect(() => {
+		dispatch(getProfile(user?.id));
+		// eslint-disable-next-line
+	}, []);
+
 	return (
 		<>
 			<div className="row m-0">
-				<div className="col-12 col-md-6 col-lg-4">
+				<div className="col-12 col-sm-6 col-xl-4">
 					<Form className="form-signin w-100 m-auto">
 						<Form.Group className="mb-3" controlId="formBasicUsername">
 							<Form.Label className="">نام کاربری :</Form.Label>

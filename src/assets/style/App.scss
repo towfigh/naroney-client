@@ -88,11 +88,6 @@ textarea {
 	width: max-content;
 }
 
-.admin_layout {
-	width: calc(100% - 250px);
-	left: 0;
-}
-
 @media (max-width: 768px) {
 	.admin_layout {
 		width: 100%;

@@ -14,7 +14,7 @@ const Dashboard = () => {
 				{items.map((item) => (
 					<div
 						key={item?.id}
-						className="col-6 col-md-4 col-lg-3 d-flex align-items-end mt-5"
+						className="col-6 col-md-4 col-lg-3 d-flex align-items-end mt-3"
 					>
 						<div className="dashboard-item text-center">
 							<Link to={`/admin/${item?.url}`}>

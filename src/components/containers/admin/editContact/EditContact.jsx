@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Form } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-// import { setAdmin } from '../../../../redux/actions/mainActions';
+import { getContact, setContact } from '../../../../redux/actions/mainActions';
 import { getDate } from '../../../../utils/getDate';
 import { toastConfig } from '../../../../utils/toastHelper';
 
@@ -16,7 +16,7 @@ const EditContact = ({ contact }) => {
 	const [email, setEmail] = useState('');
 	const [editMode, setEditMode] = useState(false);
 
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
 	const handleEditContact = (e) => {
 		const data = new FormData();
@@ -26,15 +26,16 @@ const EditContact = ({ contact }) => {
 		data.append('address', address);
 		data.append('insta', insta);
 		data.append('email', email);
+		data.append('action', 'EDIT');
 		data.append('date', getDate());
 
 		axios
-			.post('https://api.naroneymeson.ir/admin/editContact.php', data)
+			.post('https://api.naroneymeson.ir/admin/contact.php', data)
 			.then((data) => {
 				// console.clear();
 				console.log(data.data);
 				if (data?.data?.status === 'ok') {
-					// dispatch(setAdmin(data?.data?.data));
+					dispatch(setContact(data?.data?.data));
 					toast.success(data?.data?.msg, toastConfig);
 					setEditMode(false);
 				} else if (data?.data?.status === 'err') {
@@ -52,12 +53,20 @@ const EditContact = ({ contact }) => {
 		setInsta(contact?.find((i) => i.id === '5')?.value || '');
 		setEmail(contact?.find((i) => i.id === '6')?.value || '');
 	}, [contact]);
+
+	useEffect(() => {
+		dispatch(getContact());
+	}, [dispatch]);
+
 	return (
 		<>
 			<div className="row m-0">
-				<div className="col-12 col-md-6 col-lg-4">
-					<Form className="form-signin w-100 m-auto">
-						<Form.Group className="mb-3" controlId="formBasicPassword">
+				<div className="col-12">
+					<Form className="form-signin w-100 m-auto row">
+						<Form.Group
+							className="mb-3 col-12 col-md-6 col-lg-4"
+							controlId="formBasicPassword"
+						>
 							<Form.Label className="">
 								{contact?.find((i) => i.id === '1')?.name_persian} :
 							</Form.Label>
@@ -72,7 +81,10 @@ const EditContact = ({ contact }) => {
 							/>
 						</Form.Group>
 
-						<Form.Group className="mb-3" controlId="formBasicEmail">
+						<Form.Group
+							className="mb-3 col-12 col-md-6 col-lg-4"
+							controlId="formBasicEmail"
+						>
 							<Form.Label className="">
 								{contact?.find((i) => i.id === '2')?.name_persian} :
 							</Form.Label>
@@ -87,7 +99,10 @@ const EditContact = ({ contact }) => {
 							/>
 						</Form.Group>
 
-						<Form.Group className="mb-3" controlId="formBasicEmail">
+						<Form.Group
+							className="mb-3 col-12 col-md-6 col-lg-4"
+							controlId="formBasicEmail"
+						>
 							<Form.Label className="">
 								{contact?.find((i) => i.id === '3')?.name_persian} :
 							</Form.Label>
@@ -116,7 +131,10 @@ const EditContact = ({ contact }) => {
 							/>
 						</Form.Group>
 
-						<Form.Group className="mb-3" controlId="formBasicEmail">
+						<Form.Group
+							className="mb-3 col-12 col-md-6"
+							controlId="formBasicEmail"
+						>
 							<Form.Label className="">
 								{contact?.find((i) => i.id === '5')?.name_persian} :
 							</Form.Label>
@@ -132,7 +150,10 @@ const EditContact = ({ contact }) => {
 							/>
 						</Form.Group>
 
-						<Form.Group className="mb-3" controlId="formBasicEmail">
+						<Form.Group
+							className="mb-3 col-12 col-md-6"
+							controlId="formBasicEmail"
+						>
 							<Form.Label className="">
 								{contact?.find((i) => i.id === '6')?.name_persian} :
 							</Form.Label>

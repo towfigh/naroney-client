@@ -6,7 +6,13 @@ import { toastConfig } from '../../../utils/toastHelper';
 import { useDispatch } from 'react-redux';
 import { setAdmin } from '../../../redux/actions/adminActions';
 import { Link, useNavigate } from 'react-router-dom';
-import { setContact } from '../../../redux/actions/mainActions';
+import {
+	setCategories,
+	setColors,
+	setContact,
+	setSizes,
+} from '../../../redux/actions/mainActions';
+import { showLogs } from '../../../app/Rules';
 
 const Login = () => {
 	const [username, setUsername] = useState('');
@@ -22,11 +28,16 @@ const Login = () => {
 		axios
 			.post('https://api.naroneymeson.ir/admin/login.php', data)
 			.then((data) => {
-				console.clear();
-				console.log(data.data);
+				if (showLogs) {
+					console.log(data.data);
+				}
 				if (data?.data?.status === 'ok') {
 					dispatch(setAdmin(data?.data?.data?.user));
 					dispatch(setContact(data?.data?.data?.contact));
+					dispatch(setCategories(data?.data?.data?.categories));
+					dispatch(setColors(data?.data?.data?.colors));
+					dispatch(setSizes(data?.data?.data?.sizes));
+					// dispatch(setProducts(data?.data?.data?.products));
 					navigate('/admin', { replace: true });
 				} else if (data?.data?.status === 'err') {
 					toast.error(data?.data?.msg, toastConfig);
