@@ -9,6 +9,10 @@ import { toast } from 'react-toastify';
 import { toastConfig } from '../../../../utils/toastHelper';
 import { showLogs } from '../../../../app/Rules';
 import { getAllSizes, setSizes } from '../../../../redux/actions/mainActions';
+import {
+	clearLoading,
+	setLoading,
+} from '../../../../redux/actions/loaderAction';
 
 const Sizes = ({ sizes }) => {
 	const dispatch = useDispatch();
@@ -20,10 +24,12 @@ const Sizes = ({ sizes }) => {
 		data.append('size', size);
 		data.append('action', 'ADD');
 		data.append('date', getDate());
+		dispatch(setLoading());
 
 		axios
 			.post('https://api.naroneymeson.ir/admin/sizes.php', data)
 			.then((data) => {
+				dispatch(clearLoading());
 				if (showLogs) {
 					console.log(data.data);
 				}
@@ -35,7 +41,10 @@ const Sizes = ({ sizes }) => {
 					toast.error(data?.data?.msg, toastConfig);
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				dispatch(clearLoading());
+				console.log(err);
+			});
 	};
 
 	useEffect(() => {
@@ -47,10 +56,12 @@ const Sizes = ({ sizes }) => {
 		data.append('id', id);
 		data.append('action', 'DELETE');
 		data.append('date', getDate());
+		dispatch(setLoading());
 
 		axios
 			.post('https://api.naroneymeson.ir/admin/sizes.php', data)
 			.then((data) => {
+				dispatch(clearLoading());
 				if (showLogs) {
 					console.log(data.data);
 				}
@@ -61,7 +72,10 @@ const Sizes = ({ sizes }) => {
 					toast.error(data?.data?.msg, toastConfig);
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				dispatch(clearLoading());
+				console.log(err);
+			});
 	};
 	return (
 		<div>

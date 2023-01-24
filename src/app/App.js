@@ -2,6 +2,7 @@ import React from 'react';
 import Router from './Router';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../assets/style/App.scss';
+import 'swiper/css';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { persistor, store } from './store';

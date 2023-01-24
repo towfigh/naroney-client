@@ -1,6 +1,6 @@
 .dashboard-item {
 	img {
-		width: 90%;
+		width: 70%;
 		height: auto;
 		max-width: 100%;
 		max-height: 100%;
@@ -20,6 +20,33 @@
 	}
 }
 
+.unread_msg {
+	width: 15px;
+	height: 15px;
+	display: block;
+	background: $pink;
+	border-radius: 50%;
+	border: solid 1px;
+}
+
+.read_msg {
+	width: 15px;
+	height: 15px;
+	display: block;
+	background: $white;
+	border-radius: 50%;
+	border: solid 1px;
+}
+
+tr:hover {
+	cursor: pointer;
+	background-color: #ffb7c245;
+}
+
+.unread_sidebar {
+	width: 22px;
+	height: 22px;
+}
 @media (min-width: 768px) {
 	.admin_layout {
 		padding-right: 280px !important;

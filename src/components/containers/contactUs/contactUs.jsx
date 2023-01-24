@@ -8,15 +8,13 @@ import {
 } from 'react-icons/fa';
 import { connect, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { showLogs } from '../../../../app/Rules';
-import {
-	clearLoading,
-	setLoading,
-} from '../../../../redux/actions/loaderAction';
-import { getDate } from '../../../../utils/getDate';
-import { toastConfig } from '../../../../utils/toastHelper';
+import { showLogs } from '../../../app/Rules';
+import { clearLoading, setLoading } from '../../../redux/actions/loaderAction';
+import { getDate } from '../../../utils/getDate';
+import { toastConfig } from '../../../utils/toastHelper';
+import Header from '../../shared/Header';
 
-const Contact = ({ contact }) => {
+const ContactUs = ({ contact }) => {
 	const [contactInfo, setContactInfo] = useState({});
 	const [name, setName] = useState('');
 	const [mobile, setMobile] = useState('');
@@ -74,9 +72,9 @@ const Contact = ({ contact }) => {
 				console.log(err);
 			});
 	};
-
 	return (
-		<div className="contact py-5 my-5" id="contact_us">
+		<div>
+			<Header />
 			<div className="container">
 				<h1 className="text-center fw-bolder py-3">با ما در تماس باشید</h1>
 				<div className="row m-auto">
@@ -196,4 +194,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps)(Contact);
+export default connect(mapStateToProps)(ContactUs);

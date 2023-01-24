@@ -9,6 +9,10 @@ import { useDispatch } from 'react-redux';
 import { setColors } from '../../../../redux/actions/mainActions';
 import { toastConfig } from '../../../../utils/toastHelper';
 import { toast } from 'react-toastify';
+import {
+	clearLoading,
+	setLoading,
+} from '../../../../redux/actions/loaderAction';
 
 const ColorItem = ({ item }) => {
 	const dispatch = useDispatch();
@@ -27,10 +31,11 @@ const ColorItem = ({ item }) => {
 		data.append('id', item?.id);
 		data.append('action', 'DELETE');
 		data.append('date', getDate());
-
+		dispatch(setLoading());
 		axios
 			.post('https://api.naroneymeson.ir/admin/colors.php', data)
 			.then((data) => {
+				dispatch(clearLoading());
 				if (showLogs) {
 					console.log(data.data);
 				}
@@ -41,7 +46,10 @@ const ColorItem = ({ item }) => {
 					toast.error(data?.data?.msg, toastConfig);
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				dispatch(clearLoading());
+				console.log(err);
+			});
 	};
 	const handleEditColor = () => {
 		const data = new FormData();
@@ -50,10 +58,11 @@ const ColorItem = ({ item }) => {
 		data.append('code', colorCode);
 		data.append('action', 'EDIT');
 		data.append('date', getDate());
-
+		dispatch(setLoading());
 		axios
 			.post('https://api.naroneymeson.ir/admin/colors.php', data)
 			.then((data) => {
+				dispatch(clearLoading());
 				if (showLogs) {
 					console.log(data.data);
 				}
@@ -65,7 +74,10 @@ const ColorItem = ({ item }) => {
 					toast.error(data?.data?.msg, toastConfig);
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				dispatch(clearLoading());
+				console.log(err);
+			});
 	};
 	return (
 		<div className="color_item d-flex align-items-center justify-content-around">

@@ -10,6 +10,11 @@ import { setCategories } from '../../../../redux/actions/mainActions';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { showLogs } from '../../../../app/Rules';
+import BackBtn from '../../../shared/backBtn';
+import {
+	clearLoading,
+	setLoading,
+} from '../../../../redux/actions/loaderAction';
 
 const AddCategory = () => {
 	const dispatch = useDispatch();
@@ -33,10 +38,13 @@ const AddCategory = () => {
 		data.append('image', croppedImage);
 		data.append('action', 'ADD');
 		data.append('date', getDate());
+		dispatch(setLoading());
 
 		axios
 			.post('https://api.naroneymeson.ir/admin/categories.php', data)
 			.then((data) => {
+				dispatch(clearLoading());
+
 				if (showLogs) {
 					console.log(data.data);
 				}
@@ -48,11 +56,15 @@ const AddCategory = () => {
 					toast.error(data?.data?.msg, toastConfig);
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				dispatch(clearLoading());
+				console.log(err);
+			});
 	};
 
 	return (
 		<>
+			<BackBtn />
 			<h3 className="middle-title_lg text-center fw-bolder mx-auto py-3 mb-4">
 				افزودن دسته بندی جدید
 			</h3>

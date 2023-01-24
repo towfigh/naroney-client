@@ -11,6 +11,10 @@ import {
 } from '../../../../redux/actions/mainActions';
 import { getDate } from '../../../../utils/getDate';
 import { toastConfig } from '../../../../utils/toastHelper';
+import {
+	clearLoading,
+	setLoading,
+} from '../../../../redux/actions/loaderAction';
 
 const Categories = ({ categories }) => {
 	const navigate = useNavigate();
@@ -24,10 +28,12 @@ const Categories = ({ categories }) => {
 		data.append('id', id);
 		data.append('action', 'DELETE');
 		data.append('date', getDate());
+		dispatch(setLoading());
 
 		axios
 			.post('https://api.naroneymeson.ir/admin/categories.php', data)
 			.then((data) => {
+				dispatch(clearLoading());
 				if (showLogs) {
 					console.log(data.data);
 				}
@@ -38,7 +44,10 @@ const Categories = ({ categories }) => {
 					toast.error(data?.data?.msg, toastConfig);
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				dispatch(clearLoading());
+				console.log(err);
+			});
 	};
 
 	useEffect(() => {

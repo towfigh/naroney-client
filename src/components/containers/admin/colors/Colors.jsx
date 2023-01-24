@@ -9,6 +9,10 @@ import { getAllColors, setColors } from '../../../../redux/actions/mainActions';
 import { getDate } from '../../../../utils/getDate';
 import { toastConfig } from '../../../../utils/toastHelper';
 import ColorItem from './ColorItem';
+import {
+	clearLoading,
+	setLoading,
+} from '../../../../redux/actions/loaderAction';
 
 const Colors = ({ colors }) => {
 	const dispatch = useDispatch();
@@ -22,10 +26,12 @@ const Colors = ({ colors }) => {
 		data.append('code', colorCode);
 		data.append('action', 'ADD');
 		data.append('date', getDate());
+		dispatch(setLoading());
 
 		axios
 			.post('https://api.naroneymeson.ir/admin/colors.php', data)
 			.then((data) => {
+				dispatch(clearLoading());
 				if (showLogs) {
 					console.log(data.data);
 				}
@@ -37,7 +43,10 @@ const Colors = ({ colors }) => {
 					toast.error(data?.data?.msg, toastConfig);
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				dispatch(clearLoading());
+				console.log(err);
+			});
 	};
 
 	useEffect(() => {

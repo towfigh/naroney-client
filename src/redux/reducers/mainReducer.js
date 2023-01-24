@@ -4,6 +4,7 @@ import {
 	SET_COLORS,
 	SET_SIZES,
 	SET_PRODUCTS,
+	SET_MESSAGES,
 } from '../actionTypes';
 
 const initialState = {
@@ -31,6 +32,11 @@ const mainReducer = (state = initialState, action) => {
 			return {
 				...state,
 				sizes: action.sizes,
+			};
+		case SET_MESSAGES:
+			return {
+				...state,
+				messages: action.messages,
 			};
 		case SET_PRODUCTS:
 			return {

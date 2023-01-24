@@ -10,24 +10,32 @@ import {
 	setCategories,
 	setColors,
 	setContact,
+	setMessages,
+	setProducts,
 	setSizes,
 } from '../../../redux/actions/mainActions';
 import { showLogs } from '../../../app/Rules';
+import { clearLoading, setLoading } from '../../../redux/actions/loaderAction';
 
 const Login = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+	const [inRequest, setInRequest] = useState(false);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const handleLogin = (e) => {
 		e.preventDefault();
+		setInRequest(true);
 		const data = new FormData();
 		data.append('username', username);
 		data.append('password', password);
+		dispatch(setLoading());
 
 		axios
 			.post('https://api.naroneymeson.ir/admin/login.php', data)
 			.then((data) => {
+				setInRequest(false);
+				dispatch(clearLoading());
 				if (showLogs) {
 					console.log(data.data);
 				}
@@ -37,13 +45,17 @@ const Login = () => {
 					dispatch(setCategories(data?.data?.data?.categories));
 					dispatch(setColors(data?.data?.data?.colors));
 					dispatch(setSizes(data?.data?.data?.sizes));
-					// dispatch(setProducts(data?.data?.data?.products));
+					dispatch(setProducts(data?.data?.data?.products));
+					dispatch(setMessages(data?.data?.data?.messages));
 					navigate('/admin', { replace: true });
 				} else if (data?.data?.status === 'err') {
 					toast.error(data?.data?.msg, toastConfig);
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				dispatch(clearLoading());
+				console.log(err);
+			});
 	};
 	return (
 		<>
@@ -76,8 +88,12 @@ const Login = () => {
 						/>
 					</Form.Group>
 
-					<button type="submit" className="nn_btn_primary w-100 fs-3 p-0">
-						ورود
+					<button
+						type="submit"
+						className="nn_btn_primary w-100 fs-3 p-0"
+						disabled={inRequest}
+					>
+						{inRequest ? 'لطفا منتظر بمانید ...' : 'ورود'}
 					</button>
 
 					<Link to="/" className="text-center m-auto mt-3">

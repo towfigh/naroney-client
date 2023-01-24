@@ -83,6 +83,21 @@ textarea {
 	color: $white;
 }
 
+.nn_btn_secondary_sm {
+	font-family: yekan;
+	border: solid 1px $pink;
+	background-color: transparent;
+	color: $pink;
+	padding: 2px 6px;
+	font-size: 0.7rem;
+	transition: all 0.3s;
+}
+.nn_btn_secondary_sm:hover {
+	border: solid 1px $pink;
+	background-color: $pink;
+	color: $white;
+}
+
 .middle-title_lg {
 	border-bottom: solid 1px $pink;
 	width: max-content;
@@ -91,6 +106,10 @@ textarea {
 @media (max-width: 768px) {
 	.admin_layout {
 		width: 100%;
+	}
+
+	.back_btn {
+		margin-top: -2rem;
 	}
 }
 
@@ -106,6 +125,7 @@ textarea {
 @import './footer.scss';
 @import './navigation.scss';
 @import './sidebar.scss';
+@import './loader.scss';
 
 // Pages
 @import './landing.scss';

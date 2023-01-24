@@ -6,6 +6,11 @@ import { toast } from 'react-toastify';
 import { getContact, setContact } from '../../../../redux/actions/mainActions';
 import { getDate } from '../../../../utils/getDate';
 import { toastConfig } from '../../../../utils/toastHelper';
+import { showLogs } from '../../../../app/Rules';
+import {
+	clearLoading,
+	setLoading,
+} from '../../../../redux/actions/loaderAction';
 
 const EditContact = ({ contact }) => {
 	const [tel, setTel] = useState('');
@@ -14,6 +19,10 @@ const EditContact = ({ contact }) => {
 	const [address, setAddress] = useState('');
 	const [insta, setInsta] = useState('');
 	const [email, setEmail] = useState('');
+	const [subTop, setSubTop] = useState('');
+	const [subDown, setSubDown] = useState('');
+	const [about1, setAbout1] = useState('');
+	const [about2, setAbout2] = useState('');
 	const [editMode, setEditMode] = useState(false);
 
 	const dispatch = useDispatch();
@@ -26,14 +35,21 @@ const EditContact = ({ contact }) => {
 		data.append('address', address);
 		data.append('insta', insta);
 		data.append('email', email);
+		data.append('subTop', subTop);
+		data.append('subDown', subDown);
+		data.append('about1', about1);
+		data.append('about2', about2);
 		data.append('action', 'EDIT');
 		data.append('date', getDate());
+		dispatch(setLoading());
 
 		axios
 			.post('https://api.naroneymeson.ir/admin/contact.php', data)
 			.then((data) => {
-				// console.clear();
-				console.log(data.data);
+				dispatch(clearLoading());
+				if (showLogs) {
+					console.log(data.data);
+				}
 				if (data?.data?.status === 'ok') {
 					dispatch(setContact(data?.data?.data));
 					toast.success(data?.data?.msg, toastConfig);
@@ -42,7 +58,10 @@ const EditContact = ({ contact }) => {
 					toast.error(data?.data?.msg, toastConfig);
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				dispatch(clearLoading());
+				console.log(err);
+			});
 	};
 
 	useEffect(() => {
@@ -52,6 +71,10 @@ const EditContact = ({ contact }) => {
 		setAddress(contact?.find((i) => i.id === '4')?.value || '');
 		setInsta(contact?.find((i) => i.id === '5')?.value || '');
 		setEmail(contact?.find((i) => i.id === '6')?.value || '');
+		setSubTop(contact?.find((i) => i.id === '7')?.value || '');
+		setSubDown(contact?.find((i) => i.id === '8')?.value || '');
+		setAbout1(contact?.find((i) => i.id === '9')?.value || '');
+		setAbout2(contact?.find((i) => i.id === '10')?.value || '');
 	}, [contact]);
 
 	useEffect(() => {
@@ -166,6 +189,60 @@ const EditContact = ({ contact }) => {
 								onChange={(e) => setEmail(e.target.value)}
 								required
 								dir="ltr"
+							/>
+						</Form.Group>
+						<Form.Group className="mb-3 col-12" controlId="formBasicEmail">
+							<Form.Label className="">
+								{contact?.find((i) => i.id === '7')?.name_persian} :
+							</Form.Label>
+							<Form.Control
+								type="text"
+								placeholder=""
+								autoComplete="false"
+								value={subTop}
+								disabled={!editMode}
+								onChange={(e) => setSubTop(e.target.value)}
+								required
+							/>
+						</Form.Group>
+						<Form.Group className="mb-3 col-12" controlId="formBasicEmail">
+							<Form.Label className="">
+								{contact?.find((i) => i.id === '8')?.name_persian} :
+							</Form.Label>
+							<Form.Control
+								type="text"
+								placeholder=""
+								autoComplete="false"
+								value={subDown}
+								disabled={!editMode}
+								onChange={(e) => setSubDown(e.target.value)}
+								required
+							/>
+						</Form.Group>
+						<Form.Group className="mb-3" controlId="formBasicEmail">
+							<Form.Label className="">
+								{contact?.find((i) => i.id === '9')?.name_persian} :
+							</Form.Label>
+							<Form.Control
+								as="textarea"
+								rows={3}
+								value={about1}
+								disabled={!editMode}
+								onChange={(e) => setAbout1(e.target.value)}
+								required
+							/>
+						</Form.Group>
+						<Form.Group className="mb-3" controlId="formBasicEmail">
+							<Form.Label className="">
+								{contact?.find((i) => i.id === '10')?.name_persian} :
+							</Form.Label>
+							<Form.Control
+								as="textarea"
+								rows={3}
+								value={about2}
+								disabled={!editMode}
+								onChange={(e) => setAbout2(e.target.value)}
+								required
 							/>
 						</Form.Group>
 

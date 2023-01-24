@@ -19,7 +19,7 @@ const WrapperAdmin = ({ children }) => {
 					<img alt="" src={`${process.env.PUBLIC_URL}/img/ham.png`} />
 				</button>
 			</div>
-			<div className="admin_layout p-3 mt-5 mt-lg-0 pt-5 p-lg-5">
+			<div className="admin_layout p-3 mt-4 mt-lg-0 pt-5 p-lg-5">
 				<div>{children}</div>
 			</div>
 		</>

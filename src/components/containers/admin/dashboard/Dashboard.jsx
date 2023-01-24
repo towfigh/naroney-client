@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 const Dashboard = () => {
 	const items = [
 		{ id: 1, name: 'تنظیمات حساب', image: 'profile.png', url: 'profile' },
-		{ id: 2, name: 'اطلاعات تماس', image: 'contact.png', url: 'editcontact' },
+		{ id: 2, name: 'اطلاعات سایت', image: 'contact.png', url: 'editcontact' },
 		{ id: 3, name: 'محصولات', image: 'products.png', url: 'products' },
 		{ id: 4, name: 'دسته بندی', image: 'category.png', url: 'categories' },
+		{ id: 5, name: 'پیام ها', image: 'messages.png', url: 'messages' },
 	];
 	return (
 		<>

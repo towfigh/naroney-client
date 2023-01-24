@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { connect, useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import { getAllFeed } from '../../../redux/actions/mainActions';
 
-const Navigation = ({ expand }) => {
+const Navigation = ({ categories }) => {
 	const location = useLocation();
+	const dispatch = useDispatch();
 	const [backColor, setBackColor] = useState('#00000000');
 	const [backPadding, setBackPadding] = useState('0.5rem');
 	const [backPosition, setBackPosition] = useState('absolute');
+
 	useEffect(() => {
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 		if (window.innerWidth < 576) {
@@ -23,7 +27,7 @@ const Navigation = ({ expand }) => {
 						setBackPadding('0.5rem');
 					}
 				} else {
-					if (window.scrollY > 355) {
+					if (window.scrollY > 270) {
 						setBackColor('#000');
 						setBackPadding('0');
 					} else {
@@ -36,6 +40,11 @@ const Navigation = ({ expand }) => {
 			setBackPosition('absolute');
 		}
 	}, [location]);
+
+	useEffect(() => {
+		dispatch(getAllFeed());
+		// eslint-disable-next-line
+	}, []);
 	return (
 		<Navbar
 			expand="sm"
@@ -66,14 +75,13 @@ const Navigation = ({ expand }) => {
 						<NavDropdown.Item href="/products/0">
 							- تمام محصولات
 						</NavDropdown.Item>
-						<NavDropdown.Item href="#action/3.1">- لباس عروس</NavDropdown.Item>
-						<NavDropdown.Item href="#action/3.2">- لباس شب</NavDropdown.Item>
-						<NavDropdown.Item href="#action/3.3">
-							- لباس فرمالیته
-						</NavDropdown.Item>
-						<NavDropdown.Item href="#action/3.4">- سایز بزرگ</NavDropdown.Item>
+						{categories?.map((item) => (
+							<NavDropdown.Item href={`/products/${item?.id}`} key={item?.id}>
+								- {item?.name}
+							</NavDropdown.Item>
+						))}
 					</NavDropdown>
-					<Nav.Link className="nav-link" href="/">
+					<Nav.Link className="nav-link" href="/contact-us">
 						تماس با ما
 					</Nav.Link>
 					<Nav.Link className="nav-link" href="/about">
@@ -85,4 +93,11 @@ const Navigation = ({ expand }) => {
 	);
 };
 
-export default Navigation;
+function mapStateToProps(state) {
+	const { main } = state;
+	return {
+		categories: main?.categories,
+	};
+}
+
+export default connect(mapStateToProps)(Navigation);

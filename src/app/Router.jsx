@@ -19,6 +19,12 @@ import AddCategory from '../components/containers/admin/categories/AddCategory';
 import EditCategory from '../components/containers/admin/categories/EditCategory';
 import Colors from '../components/containers/admin/colors/Colors';
 import Sizes from '../components/containers/admin/sizes/Sizes';
+import AddProduct from '../components/containers/admin/products/AddProduct';
+import EditProduct from '../components/containers/admin/products/EditProduct';
+import Loader from '../components/layouts/Loader';
+import Messages from '../components/containers/admin/messages/Messages';
+import ShowMessage from '../components/containers/admin/messages/ShowMessage';
+import ContactUs from '../components/containers/contactUs/contactUs';
 
 const Router = () => {
 	return (
@@ -36,6 +42,8 @@ const Router = () => {
 				theme="dark"
 				draggablePercent={40}
 			/>
+			<Loader />
+
 			<Routes>
 				<Route
 					path="/"
@@ -47,8 +55,9 @@ const Router = () => {
 				>
 					<Route exact path="/" element={<Landing />} />
 					<Route path="/about" element={<About />} />
+					<Route path="/contact-us" element={<ContactUs />} />
 					<Route path="/products/:cat" element={<Products />} />
-					<Route path="/product/:id" element={<Product />} />
+					<Route path="/product/:code" element={<Product />} />
 				</Route>
 				<Route path="/nnlogin" element={<Login />} />
 				<Route element={<PrivateRoutes />}>
@@ -62,10 +71,18 @@ const Router = () => {
 							element={<EditCategory />}
 						/>
 					</Route>
+					<Route path="/admin/products" element={<Outlet />}>
+						<Route path="/admin/products" element={<ProductsAdmin />} />
+						<Route path="/admin/products/add" element={<AddProduct />} />
+						<Route path="/admin/products/edit/:id" element={<EditProduct />} />
+					</Route>
 					<Route path="/admin/colors" element={<Colors />} />
 					<Route path="/admin/sizes" element={<Sizes />} />
 					<Route path="/admin/profile" element={<Profile />} />
-					<Route path="/admin/products" element={<ProductsAdmin />} />
+					<Route path="/admin/messages" element={<Outlet />}>
+						<Route path="/admin/messages" element={<Messages />} />
+						<Route path="/admin/messages/:id" element={<ShowMessage />} />
+					</Route>
 				</Route>
 				<Route
 					path="*"

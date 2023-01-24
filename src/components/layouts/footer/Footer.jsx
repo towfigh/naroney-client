@@ -1,25 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Footer = () => {
+const Footer = ({ contact }) => {
 	return (
 		<>
 			<div className="Footer pb-3 pt-5">
 				<div className="row container m-auto">
 					<div className="footer_info col-12 col-md-6">
 						<h4 className="mb-5">مزون نارُنِی</h4>
-						<p>
-							دوخـت ، فــروش و اجــاره به روزترین و شیک ترین لباس های عروس و
-							مجلسی
-						</p>
+						<p>{contact?.find((c) => c.id === '8')?.value}</p>
 						<p>
 							<span>با مدیریت : </span>
 							<span className="fw-bolder">سجـــادیان</span>
 						</p>
 						<h6>آدرس :</h6>
-						<p>
-							تهران - فلکه دوم تهرانپارس، پاساژ نگین شرق (جنب بانک دی) ، طبقه
-							اول، واحد 18 .
-						</p>
+						<p>{contact?.find((c) => c.id === '4')?.value}</p>
 					</div>
 					<div className="col-12 col-md-6 text-center">
 						<iframe
@@ -42,4 +37,11 @@ const Footer = () => {
 	);
 };
 
-export default Footer;
+function mapStateToProps(state) {
+	const { main } = state;
+	return {
+		contact: main?.contact,
+	};
+}
+
+export default connect(mapStateToProps)(Footer);

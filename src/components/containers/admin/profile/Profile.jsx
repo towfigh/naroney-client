@@ -7,6 +7,10 @@ import { getProfile, setAdmin } from '../../../../redux/actions/adminActions';
 import { getDate } from '../../../../utils/getDate';
 import { toastConfig } from '../../../../utils/toastHelper';
 import { showLogs } from '../../../../app/Rules';
+import {
+	clearLoading,
+	setLoading,
+} from '../../../../redux/actions/loaderAction';
 
 const Profile = ({ user }) => {
 	const [username, setUsername] = useState('');
@@ -25,10 +29,12 @@ const Profile = ({ user }) => {
 		data.append('action', 'EDIT');
 		data.append('date', getDate());
 		data.append('userId', user?.id);
+		dispatch(setLoading());
 
 		axios
 			.post('https://api.naroneymeson.ir/admin/profile.php', data)
 			.then((data) => {
+				dispatch(clearLoading());
 				if (showLogs) {
 					console.log(data.data);
 				}
@@ -40,7 +46,10 @@ const Profile = ({ user }) => {
 					toast.error(data?.data?.msg, toastConfig);
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				dispatch(clearLoading());
+				console.log(err);
+			});
 	};
 
 	useEffect(() => {
