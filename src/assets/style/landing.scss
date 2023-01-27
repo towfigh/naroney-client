@@ -15,7 +15,8 @@
 	color: $pink-light;
 	font-family: nastaliq;
 	font-size: 90px;
-	width: 100%;
+	letter-spacing: 0;
+	width: 82%;
 	margin-left: -50px;
 }
 
@@ -29,14 +30,17 @@
 
 .category_item {
 	width: 280px;
-	height: 420px;
+	// height: 420px;
 	margin: auto;
 	margin-top: 30px;
 	h3 {
-		top: 45%;
-		font-size: 2rem;
+		bottom: 5%;
+		font-size: 1.5rem;
 		transition: all 0.5s;
-		text-shadow: 2px 2px 8px white;
+		// text-shadow: 2px 2px 8px black;
+		color: $black;
+		background-color: #fe889f96;
+		font-weight: bold;
 	}
 
 	.img_holder {
@@ -45,7 +49,7 @@
 		transition: all 0.3s;
 		.img_div {
 			width: 280px;
-			height: 420px;
+			// height: 420px;
 			top: 0;
 			right: 0;
 			bottom: 0;
@@ -57,7 +61,7 @@
 			img {
 				max-width: 100%;
 				width: 280px;
-				height: 420px;
+				// height: 420px;
 			}
 		}
 	}
@@ -68,14 +72,9 @@
 	opacity: 0.5;
 }
 
-.category_item h3 {
-	color: $pink;
-	background-color: #000000c0;
-}
-
-.category_item h3:hover {
+.category_item:hover h3 {
 	color: $white;
-	background-color: #0000007e;
+	background-color: #fe889f96;
 	border-radius: 20%;
 }
 
@@ -114,7 +113,7 @@
 // Media Queries
 // *********************
 
-@media (min-width: 1400px) {
+@media (min-width: 1300px) {
 	.hero {
 		background-image: url('../img/hero.png');
 		background-position: center;
@@ -129,8 +128,9 @@
 	.hero_title {
 		color: $pink-light;
 		font-family: nastaliq;
+		letter-spacing: 0;
 		font-size: 140px;
-		width: 75%;
+		width: 90%;
 	}
 
 	.hero_subtitle {
@@ -143,10 +143,9 @@
 
 	.category_item {
 		width: 280px;
-		height: 420px;
+		// height: 420px;
 		h3 {
-			top: 45%;
-			font-size: 2rem;
+			font-size: 1.7rem;
 			transition: all 0.5s;
 		}
 
@@ -156,7 +155,7 @@
 			transition: all 0.3;
 			.img_div {
 				width: 280px;
-				height: 420px;
+				// height: 420px;
 				top: 0;
 				right: 0;
 				bottom: 0;
@@ -168,7 +167,7 @@
 				img {
 					max-width: 100%;
 					width: 280px;
-					height: 420px;
+					// height: 420px;
 				}
 			}
 		}

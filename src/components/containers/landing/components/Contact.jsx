@@ -87,7 +87,7 @@ const Contact = ({ contact }) => {
 									<span className="nn_icon">
 										<FaPhone size={40} />
 									</span>
-									<p className="d-inline mx-3">{contactInfo?.tel}</p>
+									<p className="d-inline fw-bolder mx-3">{contactInfo?.tel}</p>
 								</a>
 							</div>
 							<div className="my-3 d-flex justify-content-start align-items-center">

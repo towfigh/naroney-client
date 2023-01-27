@@ -72,6 +72,7 @@ const ContactUs = ({ contact }) => {
 				console.log(err);
 			});
 	};
+
 	return (
 		<div>
 			<Header />

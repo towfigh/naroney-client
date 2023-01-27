@@ -60,15 +60,19 @@ const Product = ({ sizes, colors, categories }) => {
 						<h2 className="text-center fw-bold d-none d-md-block">
 							{product?.name}
 						</h2>
-						<div className="info_item mt-4 mt-lg-5">
-							<span>
-								<TfiRulerAlt size={40} />
-							</span>
-							<p className="d-inline fw-bolder mx-3">سایز :</p>
-							<p className="d-inline fw-bolder">
-								{sizes?.find((s) => s.id === product?.size_id)?.size}
-							</p>
-						</div>
+						{sizes?.find((s) => s.id === product?.size_id)?.size !== '0' ? (
+							<div className="info_item mt-4 mt-lg-5">
+								<span>
+									<TfiRulerAlt size={40} />
+								</span>
+								<p className="d-inline fw-bolder mx-3">سایز :</p>
+								<p className="d-inline fw-bolder">
+									{sizes?.find((s) => s.id === product?.size_id)?.size}
+								</p>
+							</div>
+						) : (
+							''
+						)}
 						<div className="info_item mt-4 mt-lg-5">
 							<span>
 								<MdOutlineColorLens size={40} />
@@ -105,7 +109,9 @@ const Product = ({ sizes, colors, categories }) => {
 								<MdEditNote size={40} />
 							</span>
 							<p className="d-inline fw-bolder mx-3">توضیحات :</p>
-							<p className="d-inline fw-bolder">{product?.description}</p>
+							<p className="d-inline-block mt-2 fw-bolder">
+								{product?.description}
+							</p>
 						</div>
 						{/* <div className="info_item mt-4 mt-lg-5">
 							<span>
@@ -138,8 +144,8 @@ const Product = ({ sizes, colors, categories }) => {
 												<img
 													className={
 														item.id !== stageImg.id
-															? 'w-100 mt-3 product-img_deactive'
-															: 'w-100 mt-3'
+															? 'w-100 mt-3'
+															: 'w-100 mt-3 product-img_deactive'
 													}
 													src={`${productsUrl}/${item.image}.jpg`}
 													alt=""

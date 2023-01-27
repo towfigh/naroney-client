@@ -48,23 +48,22 @@ const Slider = ({ data }) => {
 				navigation
 				speed={1000}
 				pagination={{ clickable: true }}
-				// scrollbar={{ draggable: true }}
 				modules={[Navigation, Pagination, A11y]}
-				// onSlideChange={() => console.log('slide change')}
-				// onSwiper={(swiper) => console.log(swiper)}
 				className="px-5 pb-3"
 			>
-				{data?.slice(0, 15)?.map((item) => (
+				{data?.slice(0, 10)?.map((item) => (
 					<SwiperSlide key={item?.code} className="text-center pb-4">
-						<img
-							className="slider_img w-100 my-2"
-							src={`${productsUrl}/${item?.image}.jpg`}
-							alt=""
-						/>
-						<h6 className="text-center">{item?.name}</h6>
-						<button type="button" className="nn_btn_secondary_sm m-auto">
-							<Link to={`/product/${item?.code}`}>مشاهده جزئیات</Link>
-						</button>
+						<Link to={`/product/${item?.code}`}>
+							<img
+								className="slider_img w-100 my-2"
+								src={`${productsUrl}/${item?.image}.jpg`}
+								alt=""
+							/>
+							<h6 className="text-center">{item?.name}</h6>
+							<button type="button" className="nn_btn_secondary_sm m-auto">
+								مشاهده جزئیات
+							</button>
+						</Link>
 					</SwiperSlide>
 				))}
 				{emptySlide?.map((item) => (

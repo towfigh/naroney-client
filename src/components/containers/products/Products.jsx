@@ -27,7 +27,9 @@ const Products = ({ categories }) => {
 					console.log(data.data);
 				}
 				if (data?.data?.status === 'ok') {
-					setProducts(data?.data?.data);
+					setProducts(
+						data?.data?.data?.sort((a, b) => b.visit_count - a.visit_count),
+					);
 				}
 			})
 
@@ -53,15 +55,17 @@ const Products = ({ categories }) => {
 						className="text-center py-2 mt-3 col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2"
 					>
 						<div className="pb-3 shadow border rounded-3">
-							<img
-								alt=""
-								src={`${productsUrl}/${item?.image}.jpg`}
-								className="w-100"
-							/>
-							<h4 className="my-3">{item?.name}</h4>
-							<button type="button" className="nn_btn_secondary_sm">
-								<Link to={`/product/${item?.code}`}>مشاهده جزئیات</Link>
-							</button>
+							<Link to={`/product/${item?.code}`}>
+								<img
+									alt=""
+									src={`${productsUrl}/${item?.image}.jpg`}
+									className="w-100"
+								/>
+								<h4 className="my-3">{item?.name}</h4>
+								<button type="button" className="nn_btn_secondary_sm">
+									مشاهده جزئیات
+								</button>
+							</Link>
 						</div>
 					</div>
 				))}

@@ -54,11 +54,12 @@ const AddProduct = ({ colors, categories, sizes }) => {
 		data.append('image', JSON.stringify(croppedImage));
 		data.append('action', 'ADD');
 		data.append('date', getDate());
+		dispatch(setLoading());
 
 		axios
 			.post('https://api.naroneymeson.ir/admin/products.php', data)
 			.then((data) => {
-				dispatch(setLoading());
+				dispatch(clearLoading());
 				if (showLogs) {
 					console.log(data.data);
 				}
